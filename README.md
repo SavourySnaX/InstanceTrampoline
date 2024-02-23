@@ -36,7 +36,6 @@ internal class RayLibAudioHelper
     public RayLibAudioHelper()
     {
         audioSharedData = Marshal.AllocHGlobal(Marshal.SizeOf<AudioShared>());
-        var initialise = InstanceTrampoline.InterfaceTrampoline.GetInitialise();
 
         unsafe
         {
