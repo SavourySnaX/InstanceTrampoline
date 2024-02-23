@@ -87,5 +87,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: windows-x64
-          path: build/InstanceTrampoline.dll
+          path: build/Release/InstanceTrampoline.dll
           if-no-files-found: error
