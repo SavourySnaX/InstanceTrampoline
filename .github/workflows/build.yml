@@ -25,7 +25,7 @@ jobs:
       - name: build dotnet
         run: dotnet build InstanceTrampoline -c Release
 
-  build-linux:
+  build-linux-x64:
     runs-on: ubuntu-20.04
     needs: build
     steps:
@@ -44,3 +44,48 @@ jobs:
           path: build/libInstanceTrampoline.so
           if-no-files-found: error
 
+  build-osx:
+    runs-on: macos-latest
+    needs: build
+    strategy:
+      matrix:
+        name: [x64,arm64]
+        include:
+          - name: arm64
+            arch: arm64
+          - name: x64
+            arch: x86_64
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+
+      - name: build native
+        run: |
+          cmake -S Native -B build -D CMAKE_OSX_ARCHITECTURES=${{ matrix.arch }}
+          cmake --build build --config Release
+
+      - name: upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: macos-${{ matrix.name }}
+          path: build/libInstanceTrampoline.dylib
+          if-no-files-found: error
+
+  build-windows-x64:
+    runs-on: windows-latest
+    needs: build
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+
+      - name: build native
+        run: |
+          cmake -S Native -B build -A x64
+          cmake --build build --config Release
+
+      - name: upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-x64
+          path: build/InstanceTrampoline.dll
+          if-no-files-found: error
