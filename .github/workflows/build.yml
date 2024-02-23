@@ -1,0 +1,43 @@
+name: Build
+on:
+  push:
+    branches: main
+  pull_request:
+    branches: '*'
+    paths-ignore:
+      - 'README.md'
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+      pkgversion: ${{ steps.version.outputs.pkgversion }}
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+
+      - name: dotnet
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 8.0.x
+
+      - name: build dotnet
+        run: dotnet build InstanceTrampoline -c Release
+
+  build-linux:
+    runs-on: ubuntu-20.04
+    needs: build
+    steps:
+      - name: build native
+        run: |
+          cmake -S Native -B build
+          cmake --build build --config Release
+
+      - name: upload
+        uses: actions/upload-artifact@v3
+        with:
+          name: linux-x64
+          path: build/libInstanceTrampoline.so
+          if-no-files-found: error
+
