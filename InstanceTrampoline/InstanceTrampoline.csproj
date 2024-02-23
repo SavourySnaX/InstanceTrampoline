@@ -22,7 +22,7 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <PackageID>SavourySnaX.InstanceTrampoline</PackageID>
     <Version>8.0.0</Version>
-    <PackageVersion>8.0.0-alpha</PackageVersion>
+    <PackageVersion>8.0.0</PackageVersion>
   </PropertyGroup>
 
   <ItemGroup>
