@@ -100,19 +100,19 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           name: linux-x64
-          path: InstanceTrampoline/runtimes/linux-x64/
+          path: InstanceTrampoline/runtimes/linux-x64/native
       - uses: actions/download-artifact@v4
         with:
           name: macos-x64
-          path: InstanceTrampoline/runtimes/osx-x64/
+          path: InstanceTrampoline/runtimes/osx-x64/native
       - uses: actions/download-artifact@v4
         with:
           name: macos-arm64
-          path: InstanceTrampoline/runtimes/osx-arm64/
+          path: InstanceTrampoline/runtimes/osx-arm64/native
       - uses: actions/download-artifact@v4
         with:
           name: windows-x64
-          path: InstanceTrampoline/runtimes/win-x64/
+          path: InstanceTrampoline/runtimes/win-x64/native
       
       - name: setup dotnet
         uses: actions/setup-dotnet@v4
