@@ -15,10 +15,10 @@ jobs:
       pkgversion: ${{ steps.version.outputs.pkgversion }}
     steps:
       - name: checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: dotnet
-        uses: actions/setup-dotnet@v3
+        uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 8.0.x
 
@@ -30,7 +30,7 @@ jobs:
     needs: build
     steps:
       - name: checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: build native
         run: |
@@ -38,7 +38,7 @@ jobs:
           cmake --build build --config Release
 
       - name: upload
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: linux-x64
           path: build/libInstanceTrampoline.so
