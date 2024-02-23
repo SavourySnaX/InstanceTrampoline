@@ -37,7 +37,7 @@
         #define BUILD_USES_JITPAGES
         #include <libkern/OSCacheControl.h>
         #include <pthread.h>            // Needed in addition for handling locking/unlocking of jitted memory
-    #elif defined(BUILD_LINUX_ARM64)
+    #elif defined(BUILD_LINUX_ARM64) || defined(BUILD_LINUX_X64)
         #include <stdarg.h>
     #endif
 #elif defined(BUILD_WINDOWS_X64)
