@@ -6,4 +6,35 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <Authors>Savoury SnaX</Authors>
+    <PackProject>true</PackProject>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageDescription>InstanceTrampoline is a library that provides a way to add a hidden parameter to a native call (e.g. for instancing a callback that otherwise had no instance)</PackageDescription>
+    <Title>InstanceTrampoline</Title>
+    <PackageTags>native, trampoline</PackageTags>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/SavourySnaX/InstanceTrampoline</RepositoryUrl>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <PackageID>SavourySnaX.InstanceTrampoline</PackageID>
+    <Version>8.0.0</Version>
+    <PackageVersion>8.0.0-alpha</PackageVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="../README.md" Pack="true" PackagePath="" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="runtimes/**" Link="runtimes/%(RecursiveDir)/%(Filename)%(Extension)">
+      <PackagePath>runtimes</PackagePath>
+      <Pack>true</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>
