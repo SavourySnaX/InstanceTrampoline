@@ -38,7 +38,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: linux-x64
-          path: build/libInstanceTrampoline.so
+          path: build/libInstanceTrampolineNative.so
           if-no-files-found: error
 
   build-osx:
@@ -65,7 +65,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: macos-${{ matrix.name }}
-          path: build/libInstanceTrampoline.dylib
+          path: build/libInstanceTrampolineNative.dylib
           if-no-files-found: error
 
   build-windows-x64:
@@ -84,7 +84,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: windows-x64
-          path: build/Release/InstanceTrampoline.dll
+          path: build/Release/InstanceTrampolineNative.dll
           if-no-files-found: error
 
   publish:
