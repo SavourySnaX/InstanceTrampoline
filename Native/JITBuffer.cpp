@@ -93,7 +93,11 @@ void* JITBuffer::Allocate(size_t size)
 
 void* JITBuffer::AllocateGlobalData(size_t size,size_t alignment)
 {
+#if defined(BUILD_USES_WIN32)
     return _aligned_malloc(size, alignment);
+#else
+    return aligned_alloc(aligned, size);
+#endif
 }
 
 void JITBuffer::Skip(size_t length)
