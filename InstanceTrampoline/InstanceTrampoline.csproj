@@ -21,8 +21,8 @@
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <PackageID>SavourySnaX.InstanceTrampoline</PackageID>
-    <Version>8.0.2</Version>
-    <PackageVersion>8.0.2</PackageVersion>
+    <Version>8.0.3</Version>
+    <PackageVersion>8.0.3</PackageVersion>
   </PropertyGroup>
 
   <ItemGroup>

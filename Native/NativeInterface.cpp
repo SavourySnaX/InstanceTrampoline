@@ -33,8 +33,8 @@ void printf_handler(PrintWrapper *wrapper, const char *format, ...);
 void* allocate_printer(void* method)
 {
     auto jitBuffer = new JITBuffer(8192);
-    auto string = jitBuffer->Allocate(4096);
-    auto wrapper = (PrintWrapper*)jitBuffer->Allocate(sizeof(PrintWrapper));
+    auto string = jitBuffer->AllocateGlobalData(4096, 16);
+    auto wrapper = (PrintWrapper*)jitBuffer->AllocateGlobalData(sizeof(PrintWrapper), 16);
     wrapper->bufferSize = 4096;
     wrapper->verbosity = 0;
     wrapper->bufferForPrint = string;

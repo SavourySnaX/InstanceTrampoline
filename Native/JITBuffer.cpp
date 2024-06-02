@@ -1,5 +1,6 @@
 #include <memory.h>
 #include <cassert>
+#include <stdlib.h>
 #include "JITBuffer.h"
 
 #if defined(BUILD_WINDOWS_X64)
@@ -89,6 +90,15 @@ void* JITBuffer::Allocate(size_t size)
     void* result = jitBuffer+jitPosition;
     jitPosition+=size;
     return EndBlock();
+}
+
+void* JITBuffer::AllocateGlobalData(size_t size,size_t alignment)
+{
+#if defined(BUILD_USES_WIN32)
+    return _aligned_malloc(size, alignment);
+#else
+    return aligned_alloc(alignment, size);
+#endif
 }
 
 void JITBuffer::Skip(size_t length)
