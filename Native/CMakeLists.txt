@@ -13,3 +13,7 @@ if (WIN32)
 endif()
 
 set_property(TARGET InstanceTrampolineNative PROPERTY CXX_STANDARD 17)
+
+list(APPEND SOURCES "Test.cpp")
+
+add_executable(TestInstanceTrampoline ${SOURCES})
