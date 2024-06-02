@@ -1,5 +1,6 @@
 #include <memory.h>
 #include <cassert>
+#include <stdlib.h>
 #include "JITBuffer.h"
 
 #if defined(BUILD_WINDOWS_X64)
