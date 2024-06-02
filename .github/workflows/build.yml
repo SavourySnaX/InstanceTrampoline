@@ -81,7 +81,7 @@ jobs:
         run: |
           cmake -S Native -B build -A x64
           cmake --build build --config Release
-          build/TestInstanceTrampoline.exe
+          build/Release/TestInstanceTrampoline.exe
 
       - name: upload
         uses: actions/upload-artifact@v4
