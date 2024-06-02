@@ -35,14 +35,12 @@ void* allocate_printer(void* method)
     auto jitBuffer = new JITBuffer(8192);
     auto string = jitBuffer->Allocate(4096);
     auto wrapper = (PrintWrapper*)jitBuffer->Allocate(sizeof(PrintWrapper));
-    PrintWrapper t;
-    t.bufferSize = 4096;
-    t.verbosity = 0;
-    t.bufferForPrint = string;
-    t.method = method;
-    jitBuffer->StartBlock();
-    jitBuffer->CopyBlock(&t,sizeof(t));
-    jitBuffer->EndBlock();
+    JitBeginWriteToMemory();
+    wrapper->bufferSize = 4096;
+    wrapper->verbosity = 0;
+    wrapper->bufferForPrint = string;
+    wrapper->method = method;
+    JitEndWriteToMemory((uint8_t*)wrapper,sizeof(wrapper));
     auto trampoline = new Trampoline(jitBuffer, nullptr);
 
     return trampoline->GeneratePrinter(wrapper,(void*)printf_handler);

@@ -60,6 +60,17 @@ int main(int argc, char** argv)
     printf("allocate_printer - wrapped(0,'NoParams') log string does not match");
     return 2;
   }
+  wrapped(2, "Some Params %d, %d", 2, 4);
+  if (WrappedGotLevel!=2)
+  {
+    printf("allocate_printer - wrapped(2,'Some Params', 2, 4) log level does not match");
+    return 2;
+  }
+  if (strcmp(WrappedGotString, "Some Params 2, 4")!=0)
+  {
+    printf("allocate_printer - wrapped(2,'Some Params', 2, 4) log string does not match");
+    return 2;
+  }
 
   printf("Success!\n"); 
   return 0;
