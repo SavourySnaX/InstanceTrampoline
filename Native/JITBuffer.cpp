@@ -91,6 +91,11 @@ void* JITBuffer::Allocate(size_t size)
     return EndBlock();
 }
 
+void* JITBuffer::AllocateGlobalData(size_t size,size_t alignment)
+{
+    return _aligned_malloc(size, alignment);
+}
+
 void JITBuffer::Skip(size_t length)
 {
     assert(jitPosition+length < jitAllocation && "Initial allocation for jit buffer is too small");

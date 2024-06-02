@@ -37,6 +37,7 @@ public:
     void* GetCurrentAddress() { return jitBuffer+jitPosition; }
 
     void *Allocate(size_t size);
+    void* AllocateGlobalData(size_t size, size_t alignment);
 
 private:
     void Skip(size_t length);
