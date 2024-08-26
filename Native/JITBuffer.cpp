@@ -6,7 +6,7 @@
 #if defined(BUILD_WINDOWS_X64)
 #include "NativeTrampolineWindowsX64.h"
     #define PLATFORM_TRAMPOLINE_IMPLEMENTATION  NativeTrampolineWindowsX64Implementation
-#elif defined(BUILD_MACOS_ARM64) || defined(BUILD_LINUX_ARM64)
+#elif defined(BUILD_MACOS_ARM64) || defined(BUILD_LINUX_ARM64) || defined(BUILD_WINDOWS_ARM64)
 #include "NativeTrampolineSystemVAarch64.h"
     #define PLATFORM_TRAMPOLINE_IMPLEMENTATION  NativeTrampolineSystemVAarch64Implementation
 #elif defined(BUILD_MACOS_X64) || defined(BUILD_LINUX_X64)
