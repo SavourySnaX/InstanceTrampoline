@@ -90,9 +90,28 @@ jobs:
           path: build/Release/InstanceTrampolineNative.dll
           if-no-files-found: error
 
+  build-windows-arm64:
+    runs-on: windows-latest
+    needs: build
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+
+      - name: build native
+        run: |
+          cmake -S Native -B build -A arm64
+          cmake --build build --config Release
+
+      - name: upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-arm64
+          path: build/Release/InstanceTrampolineNative.dll
+          if-no-files-found: error
+
   publish:
     runs-on: ubuntu-20.04
-    needs: [build, build-linux-x64, build-osx, build-windows-x64]
+    needs: [build, build-linux-x64, build-osx, build-windows-x64, build-windows-arm64]
     steps:
       - name: checkout
         uses: actions/checkout@v4
@@ -113,6 +132,10 @@ jobs:
         with:
           name: windows-x64
           path: InstanceTrampoline/runtimes/win-x64/native
+      - uses: actions/download-artifact@v4
+        with:
+          name: windows-arm64
+          path: InstanceTrampoline/runtimes/win-arm64/native
       
       - name: setup dotnet
         uses: actions/setup-dotnet@v4

@@ -11,8 +11,13 @@
         #error Unkown Platform/Architecture
     #endif
 #elif defined(WIN32) || defined(_WIN32)
-    #define BUILD_WINDOWS_X64
-    #define BUILD_X64
+    #if defined(_M_ARM64)
+        #define BUILD_WINDOWS_ARM64
+        #define BUILD_ARM64
+    #else
+        #define BUILD_WINDOWS_X64
+        #define BUILD_X64
+    #endif
 #elif __linux__
     #if __x86_64__
         #define BUILD_LINUX_X64
@@ -39,7 +44,7 @@
         #include <libkern/OSCacheControl.h>
         #include <pthread.h>            // Needed in addition for handling locking/unlocking of jitted memory
     #endif
-#elif defined(BUILD_WINDOWS_X64)
+#elif defined(BUILD_WINDOWS_X64) || defined(BUILD_WINDOWS_ARM64)
     #define BUILD_USES_WIN32
     #define BUILD_USES_CL
     #include <windows.h>
