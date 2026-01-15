@@ -22,6 +22,26 @@ jobs:
       - name: build dotnet
         run: dotnet build InstanceTrampoline -c Release
 
+  build-linux-arm64:
+    runs-on: ubuntu-20.04-arm
+    needs: build
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+
+      - name: build native
+        run: |
+          cmake -S Native -B build
+          cmake --build build --config Release
+          build/TestInstanceTrampoline
+
+      - name: upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: linux-arm64
+          path: build/libInstanceTrampolineNative.so
+          if-no-files-found: error
+
   build-linux-x64:
     runs-on: ubuntu-20.04
     needs: build
@@ -120,6 +140,10 @@ jobs:
         with:
           name: linux-x64
           path: InstanceTrampoline/runtimes/linux-x64/native
+      - uses: actions/download-artifact@v4
+        with:
+          name: linux-arm64
+          path: InstanceTrampoline/runtimes/linux-arm64/native
       - uses: actions/download-artifact@v4
         with:
           name: macos-x64
