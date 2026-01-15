@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
 jobs:
   build:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
       - name: checkout
         uses: actions/checkout@v4
@@ -23,7 +23,7 @@ jobs:
         run: dotnet build InstanceTrampoline -c Release
 
   build-linux-arm64:
-    runs-on: ubuntu-20.04-arm
+    runs-on: ubuntu-22.04-arm
     needs: build
     steps:
       - name: checkout
@@ -43,7 +43,7 @@ jobs:
           if-no-files-found: error
 
   build-linux-x64:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     needs: build
     steps:
       - name: checkout
@@ -130,7 +130,7 @@ jobs:
           if-no-files-found: error
 
   publish:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     needs: [build, build-linux-x64, build-osx, build-windows-x64, build-windows-arm64]
     steps:
       - name: checkout
